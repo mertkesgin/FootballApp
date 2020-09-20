@@ -71,6 +71,10 @@ class MatchesViewModel @ViewModelInject constructor(
         matchesRepositories.insertMatch(match)
     }
 
+    fun deleteMatch(match: Matches) = viewModelScope.launch {
+        matchesRepositories.deleteMatch(match)
+    }
+
     val favouritesMatches = matchesRepositories.getFavouriteMatches()
 
     fun isMatchExist(matchId:String) = matchesRepositories.isMatchExist(matchId)

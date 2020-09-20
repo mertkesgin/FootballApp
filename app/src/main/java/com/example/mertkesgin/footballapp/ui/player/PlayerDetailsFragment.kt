@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -30,6 +31,8 @@ class PlayerDetailsFragment : Fragment(R.layout.fragment_player_details) {
     @Inject
     lateinit var imageHelper: ImageHelper
 
+    private var isExist = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -47,12 +50,16 @@ class PlayerDetailsFragment : Fragment(R.layout.fragment_player_details) {
 
     private fun setupSavePlayer() {
         binding.imgSavePlayer.setOnClickListener {
-            playerViewModel.insertPlayer(player)
+            if (!isExist){
+                playerViewModel.insertPlayer(player)
+                Toast.makeText(requireContext(), "Player Saved", Toast.LENGTH_SHORT).show()
+            }else playerViewModel.deletePlayer(player)
         }
     }
 
     private fun checkIsTeamExistObserber() {
         playerViewModel.isPlayerExist(player.playerId).observe(viewLifecycleOwner, Observer {
+            isExist = it
             when(it){
                 true -> {binding.imgSavePlayer.setImageResource(R.drawable.ic_favourite_fill)}
                 else -> {binding.imgSavePlayer.setImageResource(R.drawable.ic_favourite)}

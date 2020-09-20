@@ -2,18 +2,12 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2b4d2d165500e56d963060aa0b3de4a0",
+    "identityHash": "1c69d428eaf9cbec5442093920dae7cd",
     "entities": [
       {
         "tableName": "match_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`matchId` INTEGER PRIMARY KEY AUTOINCREMENT, `eventId` TEXT NOT NULL, `dateEvent` TEXT, `strTime` TEXT, `homeTeamId` TEXT, `strHomeTeam` TEXT, `homeScore` TEXT, `awayTeamId` TEXT, `strAwayTeam` TEXT, `awayScore` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`eventId` TEXT NOT NULL, `dateEvent` TEXT, `strTime` TEXT, `homeTeamId` TEXT, `strHomeTeam` TEXT, `homeScore` TEXT, `awayTeamId` TEXT, `strAwayTeam` TEXT, `awayScore` TEXT, PRIMARY KEY(`eventId`))",
         "fields": [
-          {
-            "fieldPath": "matchId",
-            "columnName": "matchId",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
           {
             "fieldPath": "eventId",
             "columnName": "eventId",
@@ -71,23 +65,17 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "matchId"
+            "eventId"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "team_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`teamRdId` INTEGER PRIMARY KEY AUTOINCREMENT, `teamId` TEXT NOT NULL, `strTeamBadge` TEXT, `strTeam` TEXT, `formedYear` TEXT, `strStadium` TEXT, `strDescriptionEN` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`teamId` TEXT NOT NULL, `strTeamBadge` TEXT, `strTeam` TEXT, `formedYear` TEXT, `strStadium` TEXT, `strDescriptionEN` TEXT, PRIMARY KEY(`teamId`))",
         "fields": [
-          {
-            "fieldPath": "teamRdId",
-            "columnName": "teamRdId",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
           {
             "fieldPath": "teamId",
             "columnName": "teamId",
@@ -127,9 +115,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "teamRdId"
+            "teamId"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -170,7 +158,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2b4d2d165500e56d963060aa0b3de4a0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1c69d428eaf9cbec5442093920dae7cd')"
     ]
   }
 }

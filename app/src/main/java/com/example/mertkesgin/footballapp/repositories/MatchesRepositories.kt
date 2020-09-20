@@ -19,6 +19,8 @@ class MatchesRepositories @Inject constructor(
 
     suspend fun insertMatch(match:Matches) = matchesDao.insertMatch(match)
 
+    suspend fun deleteMatch(match: Matches) = matchesDao.deleteMatch(match)
+
     fun getFavouriteMatches() = matchesDao.getFavouriteMatches()
 
     fun isMatchExist(matchId:String) = matchesDao.isMatchExist(matchId)

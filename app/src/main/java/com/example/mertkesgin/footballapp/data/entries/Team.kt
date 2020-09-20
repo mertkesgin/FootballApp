@@ -7,6 +7,7 @@ import java.io.Serializable
 
 @Entity(tableName = "team_table")
 data class Team(
+    @PrimaryKey
     @SerializedName("idTeam")
     var teamId: String,
     var strTeamBadge: String? = null,
@@ -15,7 +16,4 @@ data class Team(
     var formedYear: String? = null,
     var strStadium: String? = null,
     var strDescriptionEN: String? = null
-): Serializable {
-    @PrimaryKey(autoGenerate = true)
-    var teamRdId: Int? = null
-}
+): Serializable

@@ -7,6 +7,7 @@ import java.io.Serializable
 
 @Entity(tableName = "match_table")
 data class Matches(
+    @PrimaryKey
     @SerializedName("idEvent")
     var eventId: String,
     var dateEvent: String? = null,
@@ -21,7 +22,4 @@ data class Matches(
     var strAwayTeam: String? = null,
     @SerializedName("intAwayScore")
     var awayScore: String? = null
-): Serializable {
-    @PrimaryKey(autoGenerate = true)
-    var matchId: Int? = null
-}
+): Serializable

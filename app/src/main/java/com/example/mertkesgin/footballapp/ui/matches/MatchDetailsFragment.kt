@@ -35,6 +35,8 @@ class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
     @Inject
     lateinit var imageHelper: ImageHelper
 
+    private var isExist = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -55,8 +57,10 @@ class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
 
     private fun setupSaveMatch() {
         binding.imgSaveMatch.setOnClickListener {
-            matchViewModel.insertMatch(match)
-            Toast.makeText(requireContext(), "Match Saved", Toast.LENGTH_SHORT).show()
+            if (!isExist){
+                matchViewModel.insertMatch(match)
+                Toast.makeText(requireContext(), "Match Saved", Toast.LENGTH_SHORT).show()
+            }else matchViewModel.deleteMatch(match)
         }
     }
 
@@ -111,6 +115,7 @@ class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
 
     private fun checkIsMatchExistObserver() {
         matchViewModel.isMatchExist(match.eventId).observe(viewLifecycleOwner,Observer{
+            isExist = it
             when(it){
                 true -> {binding.imgSaveMatch.setImageResource(R.drawable.ic_favourite_fill)}
                 else -> {binding.imgSaveMatch.setImageResource(R.drawable.ic_favourite)}

@@ -2,6 +2,7 @@ package com.example.mertkesgin.footballapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.mertkesgin.footballapp.R
@@ -19,5 +20,12 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigation() {
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
         bottomNavigationView.setOnNavigationItemReselectedListener { /*DO NOTHING*/ }
+        navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id){
+                R.id.playerDetailsFragment,R.id.teamDetailsFragment,R.id.matchDetailsFragment ->
+                    bottomNavigationView.visibility = View.GONE
+                else -> bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 }

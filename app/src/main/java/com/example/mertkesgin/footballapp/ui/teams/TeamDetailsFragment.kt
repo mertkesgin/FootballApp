@@ -31,6 +31,7 @@ class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
     private val args: TeamDetailsFragmentArgs by navArgs()
     private lateinit var team:Team
 
+    private var isExist = false
     @Inject
     lateinit var imageHelper: ImageHelper
 
@@ -51,13 +52,16 @@ class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
 
     private fun setupSaveTeam() {
         binding.imgSaveTeam.setOnClickListener {
-            teamsViewModel.insertTeam(team)
-            Toast.makeText(requireContext(), "Team Saved", Toast.LENGTH_SHORT).show()
+            if (!isExist){
+                teamsViewModel.insertTeam(team)
+                Toast.makeText(requireContext(), "Team Saved", Toast.LENGTH_SHORT).show()
+            }else teamsViewModel.deleteTeam(team)
         }
     }
 
     private fun checkIsTeamExist() {
         teamsViewModel.isTeamExist(team.teamId).observe(viewLifecycleOwner, Observer {
+            isExist = it
             when(it){
                 true -> {binding.imgSaveTeam.setImageResource(R.drawable.ic_favourite_fill)}
                 else -> {binding.imgSaveTeam.setImageResource(R.drawable.ic_favourite)}
@@ -97,5 +101,6 @@ class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
         teamDetails.strTeamBadge?.let { if (it != "") imageHelper.loadUrl(it,binding.imgTeamLogo) }
         teamDetails.strTeamJersey?.let { if (it != "") imageHelper.loadUrl(it,binding.imgTeamJersey) }
         teamDetails.strTeamFanart1?.let { if (it != "") imageHelper.loadUrl(it,binding.imgFanArt) }
+        binding.imgTeamDetailsBack.setOnClickListener { activity?.onBackPressed() }
     }
 }
