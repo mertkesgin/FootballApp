@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/matchFragment"
+        android:title="@string/matches"
+        android:icon="@drawable/ic_item_match"/>
+
+    <item android:id="@+id/teamsFragment"
+        android:title="@string/teams"
+        android:icon="@drawable/ic_item_teams"/>
+
+    <item android:id="@+id/playerFragment"
+        android:title="@string/player"
+        android:icon="@drawable/ic_football_player"/>
+
+    <item android:id="@+id/favouritesFragment"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_item_favourites"/>
+</menu>
