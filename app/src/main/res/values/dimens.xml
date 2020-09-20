@@ -2,6 +2,4 @@
 <resources>
     <dimen name="layout_margin_16dp">16dp</dimen>
     <dimen name="card_margin_y">10dp</dimen>
-    <dimen name="card_margin_x">8dp</dimen>
-    <dimen name="card_margin_x_2">4dp</dimen>
 </resources>

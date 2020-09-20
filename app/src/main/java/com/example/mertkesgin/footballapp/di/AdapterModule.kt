@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object MatchModule {
+object AdapterModule {
 
     @Provides
     fun provideMatchesAdapter() = MatchesAdapter()

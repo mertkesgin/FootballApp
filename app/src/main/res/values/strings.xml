@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">FootballAPP</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="leagues">
         <item>English Premier League</item>
@@ -14,7 +12,6 @@
 
 
     <string name="goals">Goals</string>
-    <string name="shots">Shots</string>
     <string name="team_a">Team A</string>
     <string name="team_b">Team B</string>
     <string name="lineups">Lineups</string>
@@ -22,39 +19,10 @@
     <string name="goalskeeper">Goal Keeper</string>
     <string name="forward">Forward</string>
     <string name="midfield">Midfield</string>
-    <string name="substitutes">Substitutes</string>
-    <string name="_0_0">0 – 0</string>
     <string name="strip"> – </string>
-    <string name="badge_home">badge_home</string>
-    <string name="badge_away">badge_away</string>
-    <string name="last_match">Last Match</string>
-    <string name="next_match">Next Match</string>
     <string name="favorites">Favorites</string>
-    <string name="football_favorites">Football Favorites</string>
-    <string name="match_detail">Match Detail</string>
-    <string name="no_result">No Result for </string>
     <string name="matches">Matches</string>
     <string name="teams">Teams</string>
-    <string name="title_matches">Football Matches</string>
-    <string name="title_teams">Football Teams</string>
-    <string name="title_team_years">Years</string>
-    <string name="title_stadium_name">Stadium</string>
-    <string name="overview">Overview</string>
-    <string name="players">Players</string>
-    <string name="position">Player Position</string>
-    <string name="weight">Weight (kg)</string>
-    <string name="height">Height (m)</string>
-    <string name="description">Description</string>
-    <string name="search">Search</string>
-    <string name="notification">Notification</string>
-    <string name="teams_desc">Team Desc</string>
-    <string name="player_desc">Player Desc</string>
-    <string name="favorites_match">Favorite Match</string>
-    <string name="favorites_team">Favorite Team</string>
-    <string name="search_match_hint">Search Matches Schedule</string>
-    <string name="search_team_hint">Search Teams</string>
-    <string name="teams_search">Team Search</string>
-    <string name="match_search">Match Search</string>
     <string name="player">Player</string>
     <string name="player_details">Player Details</string>
 </resources>
