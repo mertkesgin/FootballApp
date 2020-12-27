@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.mertkesgin.footballapp.R
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.data.entries.MatchDetails
 import com.example.mertkesgin.footballapp.data.entries.Matches
 import com.example.mertkesgin.footballapp.databinding.FragmentMatchDetailsBinding
@@ -23,12 +23,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
+class MatchDetailsFragment : BaseFragment<FragmentMatchDetailsBinding>() {
 
-    val matchViewModel:MatchesViewModel by viewModels()
-
-    private var _binding: FragmentMatchDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val matchViewModel:MatchesViewModel by viewModels()
 
     val args:MatchDetailsFragmentArgs by navArgs()
     private lateinit var match:Matches
@@ -36,13 +33,6 @@ class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
     lateinit var imageHelper: ImageHelper
 
     private var isExist = false
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMatchDetailsBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -146,4 +136,9 @@ class MatchDetailsFragment : Fragment(R.layout.fragment_match_details) {
         binding.tvAwayForward.text = matchDetails.strAwayLineupForward?.replace(";","\n")
         binding.imgBackMatchDetails.setOnClickListener { activity?.onBackPressed() }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMatchDetailsBinding = FragmentMatchDetailsBinding.inflate(inflater,container,false)
 }

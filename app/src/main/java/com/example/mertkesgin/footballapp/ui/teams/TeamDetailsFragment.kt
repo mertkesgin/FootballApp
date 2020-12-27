@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.mertkesgin.footballapp.R
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.data.entries.Team
 import com.example.mertkesgin.footballapp.data.entries.TeamDetails
 import com.example.mertkesgin.footballapp.databinding.FragmentTeamDetailsBinding
@@ -21,12 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
+class TeamDetailsFragment : BaseFragment<FragmentTeamDetailsBinding>() {
 
-    val teamsViewModel: TeamsViewModel by viewModels()
-
-    private var _binding:FragmentTeamDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val teamsViewModel: TeamsViewModel by viewModels()
 
     private val args: TeamDetailsFragmentArgs by navArgs()
     private lateinit var team:Team
@@ -34,13 +31,6 @@ class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
     private var isExist = false
     @Inject
     lateinit var imageHelper: ImageHelper
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentTeamDetailsBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -103,4 +93,9 @@ class TeamDetailsFragment : Fragment(R.layout.fragment_team_details) {
         teamDetails.strTeamFanart1?.let { if (it != "") imageHelper.loadUrl(it,binding.imgFanArt) }
         binding.imgTeamDetailsBack.setOnClickListener { activity?.onBackPressed() }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentTeamDetailsBinding = FragmentTeamDetailsBinding.inflate(inflater,container,false)
 }

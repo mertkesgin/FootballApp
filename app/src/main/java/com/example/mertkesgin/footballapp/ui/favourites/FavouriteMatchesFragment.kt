@@ -4,34 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mertkesgin.footballapp.R
 import com.example.mertkesgin.footballapp.adapters.MatchesAdapter
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.databinding.FragmentFavouriteMatchesBinding
 import com.example.mertkesgin.footballapp.ui.matches.MatchesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavouriteMatchesFragment : Fragment(R.layout.fragment_favourite_matches) {
+class FavouriteMatchesFragment : BaseFragment<FragmentFavouriteMatchesBinding>() {
 
-    val matchesViewModel: MatchesViewModel by viewModels()
+    private val matchesViewModel: MatchesViewModel by viewModels()
 
-    private var _binding: FragmentFavouriteMatchesBinding? = null
-    private val binding get() = _binding!!
     @Inject
     lateinit var matchesAdapter: MatchesAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFavouriteMatchesBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,4 +50,9 @@ class FavouriteMatchesFragment : Fragment(R.layout.fragment_favourite_matches) {
             findNavController().navigate(R.id.action_favouritesFragment_to_matchDetailsFragment,bundle)
         }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentFavouriteMatchesBinding = FragmentFavouriteMatchesBinding.inflate(inflater,container,false)
 }

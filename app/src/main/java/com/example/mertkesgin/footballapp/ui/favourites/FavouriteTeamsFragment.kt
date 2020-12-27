@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mertkesgin.footballapp.R
 import com.example.mertkesgin.footballapp.adapters.TeamsAdapter
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.databinding.FragmentFavouriteTeamsBinding
 import com.example.mertkesgin.footballapp.ui.teams.TeamsViewModel
 import com.example.mertkesgin.footballapp.utils.Constant
@@ -19,21 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavouriteTeamsFragment : Fragment(R.layout.fragment_favourite_teams) {
+class FavouriteTeamsFragment : BaseFragment<FragmentFavouriteTeamsBinding>() {
 
-    val teamsViewModel:TeamsViewModel by viewModels()
+    private val teamsViewModel:TeamsViewModel by viewModels()
 
-    private var _binding: FragmentFavouriteTeamsBinding? = null
-    private val binding get() = _binding!!
     @Inject
     lateinit var teamsAdapter: TeamsAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentFavouriteTeamsBinding.inflate(inflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,4 +51,9 @@ class FavouriteTeamsFragment : Fragment(R.layout.fragment_favourite_teams) {
             findNavController().navigate(R.id.action_favouritesFragment_to_teamDetailsFragment,bundle)
         }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentFavouriteTeamsBinding = FragmentFavouriteTeamsBinding.inflate(inflater,container,false)
 }

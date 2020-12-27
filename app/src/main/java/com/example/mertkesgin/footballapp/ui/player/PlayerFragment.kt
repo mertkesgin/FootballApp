@@ -1,16 +1,18 @@
 package com.example.mertkesgin.footballapp.ui.player
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mertkesgin.footballapp.R
 import com.example.mertkesgin.footballapp.adapters.PlayerAdapter
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.databinding.FragmentPlayerBinding
 import com.example.mertkesgin.footballapp.utils.Constant.SEARCH_PLAYER_TIME_DELAY
 import com.example.mertkesgin.footballapp.utils.ManageProgress.hideProgress
@@ -24,23 +26,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PlayerFragment : Fragment(R.layout.fragment_player) {
+class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
-    val playerViewModel: PlayerViewModel by viewModels()
-
-    private var _binding:FragmentPlayerBinding? = null
-    private val binding get() = _binding!!
+    private val playerViewModel: PlayerViewModel by viewModels()
 
     var job: Job? = null
     @Inject
     lateinit var playerAdapter: PlayerAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentPlayerBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,4 +86,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
             findNavController().navigate(R.id.action_playerFragment_to_playerDetailsFragment,bundle)
         }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentPlayerBinding = FragmentPlayerBinding.inflate(inflater,container,false)
 }

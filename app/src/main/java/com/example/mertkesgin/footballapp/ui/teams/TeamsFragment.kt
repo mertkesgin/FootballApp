@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mertkesgin.footballapp.R
 import com.example.mertkesgin.footballapp.adapters.TeamsAdapter
+import com.example.mertkesgin.footballapp.base.BaseFragment
 import com.example.mertkesgin.footballapp.databinding.FragmentTeamsBinding
 import com.example.mertkesgin.footballapp.utils.Constant.GRID_LAYOUT_COLUMN_COUNT
 import com.example.mertkesgin.footballapp.utils.ManageProgress.hideProgress
@@ -23,23 +23,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TeamsFragment : Fragment(R.layout.fragment_teams) {
+class TeamsFragment : BaseFragment<FragmentTeamsBinding>() {
 
-    val teamsViewModel: TeamsViewModel by viewModels()
+    private val teamsViewModel: TeamsViewModel by viewModels()
 
-    private var _binding: FragmentTeamsBinding? = null
-    private val binding get() = _binding!!
     @Inject
     lateinit var teamsAdapter:TeamsAdapter
     @Inject
     lateinit var spinnerAdapter:ArrayAdapter<CharSequence>
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentTeamsBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,4 +85,9 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             findNavController().navigate(R.id.action_teamsFragment_to_teamDetailsFragment,bundle)
         }
     }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentTeamsBinding = FragmentTeamsBinding.inflate(inflater,container,false)
 }
